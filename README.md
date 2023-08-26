@@ -1,2 +1,2 @@
 # ML-CC_FraudDetection
-work pls
+does work issue --> git config --GLOBAL user.name +/ user.email
