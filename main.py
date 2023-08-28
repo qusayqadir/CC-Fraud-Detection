@@ -25,12 +25,11 @@ def linear_regression():
     print(comparing)
     #since the dataset is imbalanced, data['Class'].value_counts() --> take equal number of random samples from r_transactions that are there in f_transactions
     r_samples = r_transactions.sample(n=492)
-
     combined_sample = pd.concat([r_samples, f_transactions], axis = 0) ##if axis is 0 data is added row wise if axis = 1 then data is added column wise
     print(combined_sample['Class'].value_counts()) ##shows equal data set
     combined_sample.groupby('Class').mean() #shows that data set is a good sample
     
-    new_data = combined_sample.drop(columns='Class', axis=1)
+    new_data = combined_sample.drop(columns='Class', axis=1) #loc method will be used to set a condition 
     class_set = combined_sample['Class']
     print(new_data)
     print(class_set)
