@@ -5,10 +5,10 @@
 import numpy as np #allows mathmatical functions for multi-dimensional arrays
 import pandas as pd #allows for data frames 
 from sklearn.model_selection import train_test_split #allows for training and testing data
-from sklearn.linear_model import LinearRegression #allows for predicition classification of either the pos or neg class
+from sklearn.linear_model import LogisticRegression #allows for predicition classification of either the pos or neg class
 from sklearn.metrics import accuracy_score #allows determination of how accurate the model is
 
-def linear_regression():
+def logistic_regression():
     data = pd.read_csv('/Users/qusayqadir/Documents/code/CC-Fraud/creditcard.csv') #reads the csv data 
     print(data)
     print(data['Class'].value_counts()) #shows the unbalanced data set, where 0 represents legit transaction and 1 represents fraud
@@ -34,9 +34,27 @@ def linear_regression():
     print(new_data)
     print(class_set)
 
-linear_regression()
+    new_data_train, new_data_test, class_set_train, class_set_test = train_test_split(new_data,class_set, test_size=0.2, stratify=class_set, random_state=2)
+   
+    model = LogisticRegression()
 
-def train_data():
-    print('Hello World')
+    #training the model with the new_data_train and class_set_train
+    model.fit(new_data_train, class_set_train)
+    
+    #accuracy score for training data and comparing it to the known frauds and determining how close this model is
+    new_data_train_predicition = model.predict(new_data_train)
+    trained_data_accuracy = accuracy_score(new_data_train_predicition, class_set_train)
+    print('The accuracy score for the trained data is', trained_data_accuracy*100, '%')
 
-train_data()
+
+    #accuracy test for testing data (0.8 of the data set)
+    new_data_test_prediction = model.predict(new_data_test)
+    test_data_accuracy_prediction = accuracy_score(new_data_test_prediction, class_set_test)
+    print('The accuracy score for the tested data is ', test_data_accuracy_prediction*100 , '%')
+
+
+
+
+
+
+logistic_regression()
