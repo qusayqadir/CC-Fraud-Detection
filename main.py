@@ -35,3 +35,8 @@ def linear_regression():
     print(class_set)
 
 linear_regression()
+
+def train_data():
+    print('Hello World')
+
+train_data()
